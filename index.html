@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sakura Realm — Anime Open World 3D</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- three.js dimuat dari CDN (butuh internet). Lihat README.md untuk versi offline. -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+    }
+  }
+  </script>
+</head>
+<body>
+  <div id="app"></div>
+
+  <!-- ================= HUD ================= -->
+  <div id="hud" class="hidden">
+    <div id="status">
+      <div class="portrait">雪</div>
+      <div class="statbox">
+        <div class="name">Yuki <span id="kills">· Slime: 0</span></div>
+        <div id="hpbar"><div id="hpfill"></div><span id="hptext">200 / 200</span></div>
+      </div>
+    </div>
+
+    <div id="topright">
+      <canvas id="minimap" width="440" height="440"></canvas>
+      <div id="clock">☀ 08:00 · Pagi</div>
+      <div id="place">Padang Awal</div>
+    </div>
+
+    <div id="tracker" class="hidden">
+      <div id="trackArrow">▲</div>
+      <div id="trackText"></div>
+    </div>
+
+    <div id="skills">
+      <div class="skill" id="sk-q"><div class="key">Q</div><div class="sname">Ultimate</div><div class="cd" id="cd-q"></div><div class="cdt" id="cdt-q"></div></div>
+      <div class="skill" id="sk-e"><div class="key">E</div><div class="sname">Regen</div><div class="cd" id="cd-e"></div><div class="cdt" id="cdt-e"></div></div>
+      <div class="skill" id="sk-r"><div class="key">R</div><div class="sname">Tebas</div><div class="cd" id="cd-r"></div><div class="cdt" id="cdt-r"></div></div>
+    </div>
+
+    <div id="prompt" class="hidden"></div>
+    <div id="dialogue" class="hidden">
+      <div id="dName"></div>
+      <div id="dText"></div>
+      <div class="dhint">[P] lanjut</div>
+    </div>
+    <div id="toast"></div>
+    <div id="banner" class="hidden"></div>
+    <div id="hurtflash"></div>
+
+    <div id="help">
+      <b>WASD</b> gerak · <b>Shift</b> sprint · <b>Spasi</b> lompat · <b>Mouse</b> kamera · <b>Klik kiri</b>/<b>R</b> tebas ·
+      <b>Q</b> ultimate · <b>E</b> regen · <b>P</b> interaksi · <b>M</b> peta · <b>1-3</b> tracking · <b>T</b> ganti waktu ·
+      <b>N</b> bisukan musik · <b>H</b> sembunyikan bantuan
+    </div>
+    <div id="dmgLayer"></div>
+  </div>
+
+  <!-- ================= PETA BESAR ================= -->
+  <div id="mapOverlay" class="hidden">
+    <div class="mapwrap">
+      <canvas id="bigmap" width="760" height="760"></canvas>
+      <div class="maplegend">
+        <b>Peta Dunia</b><br />
+        Klik peta untuk menaruh <b>waypoint</b>.<br />
+        <span class="dot" style="background:#ffd54a"></span> NPC &nbsp;
+        <span class="dot" style="background:#ff5a6e"></span> Slime &nbsp;
+        <span class="dot" style="background:#ff7ac8"></span> Tujuan<br />
+        1 Kerajaan · 2 Kota · 3 Desa · 4 Danau · 0 hapus tujuan<br />
+        Tekan <b>M</b> / <b>Esc</b> untuk menutup.
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= LAYAR AWAL ================= -->
+  <div id="overlay">
+    <div class="card">
+      <h1>Sakura Realm</h1>
+      <p class="sub">Anime Open World 3D · JavaScript + three.js</p>
+      <div id="loading">Memuat dunia… <span id="loadpct"></span></div>
+      <button id="startBtn" class="hidden">▶ Klik untuk Mulai</button>
+      <div class="controls">
+        <div><b>W A S D</b> Gerak</div>
+        <div><b>Shift</b> Sprint</div>
+        <div><b>Spasi</b> Lompat</div>
+        <div><b>Mouse</b> Putar kamera</div>
+        <div><b>Klik kiri / R</b> Tebasan pedang</div>
+        <div><b>Q</b> Ultimate (tebasan brutal)</div>
+        <div><b>E</b> Regen ½ HP</div>
+        <div><b>P</b> Bicara / interaksi</div>
+        <div><b>M</b> Peta · <b>1-4</b> Tracking</div>
+        <div><b>T</b> Ganti waktu · <b>N</b> Musik</div>
+        <div><b>Scroll</b> Zoom kamera · <b>F</b> Fullscreen</div>
+        <div><b>Esc</b> Jeda</div>
+      </div>
+      <p class="tip">Gunakan headphone/speaker agar musik tenang & suara karakter terdengar.</p>
+    </div>
+  </div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
